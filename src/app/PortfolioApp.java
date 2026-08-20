@@ -3,12 +3,14 @@ package app;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import javax.swing.JFrame;
+import javax.swing.JTabbedPane;
 import javax.swing.SwingUtilities;
 import model.Contract;
 import model.Contractor;
 import model.ContractorAssignment;
 import model.Timecard;
 import payrollbilling.PayrollBillingModule;
+import ui.BillingAnalystPanel;
 import ui.PayrollSpecialistPanel;
 
 public class PortfolioApp {
@@ -50,6 +52,40 @@ public class PortfolioApp {
             timecard.setWorkSummary(
                     "Software implementation support");
 
+            PayrollSpecialistPanel payrollPanel =
+                    new PayrollSpecialistPanel(
+                            module,
+                            timecard,
+                            assignment);
+
+            BillingAnalystPanel billingPanel =
+                    new BillingAnalystPanel(module);
+
+            JTabbedPane tabs =
+                    new JTabbedPane();
+
+            tabs.addTab(
+                    "Payroll Specialist",
+                    payrollPanel);
+
+            tabs.addTab(
+                    "Billing Analyst",
+                    billingPanel);
+
+            /*
+             * Refresh the Billing Analyst view whenever
+             * that tab is opened. This lets it immediately
+             * see requests created by Payroll.
+             */
+            tabs.addChangeListener(e -> {
+
+                if (tabs.getSelectedComponent()
+                        == billingPanel) {
+
+                    billingPanel.refresh();
+                }
+            });
+
             JFrame frame =
                     new JFrame(
                             "Workforce Payroll & Billing System");
@@ -57,11 +93,7 @@ public class PortfolioApp {
             frame.setDefaultCloseOperation(
                     JFrame.EXIT_ON_CLOSE);
 
-            frame.setContentPane(
-                    new PayrollSpecialistPanel(
-                            module,
-                            timecard,
-                            assignment));
+            frame.setContentPane(tabs);
 
             frame.setSize(1100, 600);
             frame.setLocationRelativeTo(null);
