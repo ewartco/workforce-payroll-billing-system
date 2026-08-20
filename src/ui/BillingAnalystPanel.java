@@ -19,6 +19,7 @@ import payrollbilling.PayrollBillingModule;
 import payrollbilling.record.BillingRecord;
 import payrollbilling.record.Invoice;
 import payrollbilling.request.BillingRequest;
+import payrollbilling.request.ClientApprovalRequest;
 
 public class BillingAnalystPanel extends JPanel {
 
@@ -216,6 +217,12 @@ public class BillingAnalystPanel extends JPanel {
 
             BillingRecord billingRecord =
                     request.getBillingRecord();
+            
+            ClientApprovalRequest approvalRequest =
+                new ClientApprovalRequest(invoice);
+
+            module.getClientApprovalRequests()
+                .add(approvalRequest);
 
             if (!module.getBillingRecords()
                     .contains(billingRecord)) {

@@ -9,6 +9,7 @@ import payrollbilling.request.BillingRequest;
 import payrollbilling.request.ContractorPaymentRequest;
 import payrollbilling.request.PayrollRequest;
 import java.util.ArrayList;
+import payrollbilling.request.ClientApprovalRequest;
 
 public class PayrollBillingModule {
 
@@ -17,6 +18,7 @@ public class PayrollBillingModule {
     private ArrayList<PayrollRequest> payrollRequests;
     private ArrayList<BillingRequest> billingRequests;
     private ArrayList<ContractorPaymentRequest> contractorPaymentRequests;
+    private ArrayList<ClientApprovalRequest> clientApprovalRequests;
 
     private ArrayList<PayrollRecord> payrollRecords;
     private ArrayList<PaymentRecord> paymentRecords;
@@ -30,6 +32,7 @@ public class PayrollBillingModule {
         payrollRequests = new ArrayList<>();
         billingRequests = new ArrayList<>();
         contractorPaymentRequests = new ArrayList<>();
+        clientApprovalRequests = new ArrayList<>();
 
         payrollRecords = new ArrayList<>();
         paymentRecords = new ArrayList<>();
@@ -52,6 +55,10 @@ public class PayrollBillingModule {
 
     public ArrayList<ContractorPaymentRequest> getContractorPaymentRequests() {
         return contractorPaymentRequests;
+    }
+    
+    public ArrayList<ClientApprovalRequest> getClientApprovalRequests() {
+        return clientApprovalRequests;
     }
 
     public ArrayList<PayrollRecord> getPayrollRecords() {

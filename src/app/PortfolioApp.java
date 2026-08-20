@@ -12,6 +12,7 @@ import model.Timecard;
 import payrollbilling.PayrollBillingModule;
 import ui.BillingAnalystPanel;
 import ui.PayrollSpecialistPanel;
+import ui.ClientApprovalPanel;
 
 public class PortfolioApp {
 
@@ -60,6 +61,9 @@ public class PortfolioApp {
 
             BillingAnalystPanel billingPanel =
                     new BillingAnalystPanel(module);
+            
+            ClientApprovalPanel clientApprovalPanel =
+                    new ClientApprovalPanel(module);
 
             JTabbedPane tabs =
                     new JTabbedPane();
@@ -71,7 +75,9 @@ public class PortfolioApp {
             tabs.addTab(
                     "Billing Analyst",
                     billingPanel);
-
+            tabs.addTab(
+                    "Client Approval",
+                    clientApprovalPanel);
             /*
              * Refresh the Billing Analyst view whenever
              * that tab is opened. This lets it immediately
@@ -84,8 +90,14 @@ public class PortfolioApp {
 
                     billingPanel.refresh();
                 }
-            });
 
+                if (tabs.getSelectedComponent()
+                        == clientApprovalPanel) {
+
+                    clientApprovalPanel.refresh();
+                }
+            });
+            
             JFrame frame =
                     new JFrame(
                             "Workforce Payroll & Billing System");
